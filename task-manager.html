@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEDGER — Task Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="scrips.js">
+
+</head>
+<body data-theme="dark">
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <span class="dot"></span>
+      <div>
+        <h1>Ledger</h1>
+        <div class="subtitle">task console — entries persist locally</div>
+      </div>
+    </div>
+    <button class="theme-toggle" id="themeToggle">◐ <span id="themeLabel">Dark</span></button>
+  </header>
+
+  <div class="readout">
+    <div class="cell"><div class="num" id="statTotal">0</div><div class="lbl">Total</div></div>
+    <div class="cell active"><div class="num" id="statActive">0</div><div class="lbl">Active</div></div>
+    <div class="cell done"><div class="num" id="statDone">0</div><div class="lbl">Done</div></div>
+    <div class="cell rate"><div class="num" id="statRate">0%</div><div class="lbl">Cleared</div></div>
+  </div>
+
+  <div class="console">
+    <form id="taskForm" autocomplete="off">
+      <div class="prompt-row">
+        <span class="caret">&gt;</span>
+        <input type="text" id="taskInput" placeholder="add a task and hit enter_" maxlength="140">
+      </div>
+      <div class="console-row2">
+        <select id="prioritySelect" title="Priority">
+          <option value="low">Low priority</option>
+          <option value="medium" selected>Medium priority</option>
+          <option value="high">High priority</option>
+        </select>
+        <input type="date" id="dueInput" title="Due date">
+        <button type="submit" class="btn primary">Add entry</button>
+      </div>
+      <div class="error-msg" id="errorMsg">Entry can't be empty.</div>
+    </form>
+  </div>
+
+  <div class="controls">
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+    <input type="text" id="searchInput" placeholder="search /">
+  </div>
+
+  <ul id="taskList"></ul>
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <span class="big">Nothing logged</span>
+    the ledger is clear — add your first entry above
+  </div>
+
+  <div class="footer-bar">
+    <div class="hint"><kbd>N</kbd> new · <kbd>/</kbd> search · <kbd>Esc</kbd> cancel edit</div>
+    <div class="footer-actions">
+      <button class="btn" id="clearCompletedBtn">Clear completed</button>
+      <button class="btn" id="exportBtn">Export</button>
+      <button class="btn" id="importBtn">Import</button>
+      <input type="file" id="importInput" accept="application/json">
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+</body>
+</html>
